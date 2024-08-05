@@ -14,7 +14,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG") == "True"
 
-ALLOWED_HOSTS = []
+try:
+    ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+except Exception:
+    raise ValueError("""Set ALLOWED_HOSTS as example '*,localhost:8000,example@site.com' """)
 
 
 # Application definition
@@ -34,6 +37,13 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     'users',
+    'currency',
+    'inventory',
+    'item',
+    'offer',
+    'price',
+    'trade',
+    'watchlist',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
