@@ -9,5 +9,9 @@ COPY Pipfile* /app/
 RUN pip install pipenv && pipenv install --system --deploy --ignore-pipfile
 COPY . .
 
-ENTRYPOINT ["python", "trading_platform/manage.py"]
-CMD ["runserver", "0.0.0.0:8000"]
+COPY entrypoint.sh /app/
+RUN chmod +x entrypoint.sh
+
+COPY . /app/
+
+CMD ./entrypoint.sh
