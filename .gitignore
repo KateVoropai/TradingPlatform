@@ -49,8 +49,9 @@ Thumbs.db
 *.wmv
 
 /venv/
-/*_postgres_data/
+**/postgres_data/
 /media/
 *.env
 .vscode/
 Pipfile.lock
+Pipfile
