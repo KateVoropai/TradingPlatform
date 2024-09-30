@@ -13,5 +13,5 @@ class Trade(models.Model):
     unit_price = models.DecimalField(max_digits=7, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     buyer_offer = models.ForeignKey(Offer, blank=True, null=True,on_delete=models.SET_NULL, related_name="buyer_trade", related_query_name="buyer_trade")
-    seller_offe = models.ForeignKey(Offer, blank=True, null=True,on_delete=models.SET_NULL, related_name="seller_trade", related_query_name="seller_trade")
+    seller_offer = models.ForeignKey(Offer, blank=True, null=True,on_delete=models.SET_NULL, related_name="seller_trade", related_query_name="seller_trade")
     

@@ -36,3 +36,42 @@ services:
       - db
     # volumes:
     #   - pgadmin_data:/var/lib/pgadmin
+
+  redis:
+    image: redis
+    container_name: redis
+    hostname: redis
+    restart: on-failure
+  
+  celery:
+    build: .
+    container_name: "celery"
+    restart: on-failure
+    command: [ 'celery', '-A', 'trading_platform', 'worker', '-l', 'INFO' ]
+    depends_on:
+      - db
+      - web
+      - redis
+
+  celery_beat:
+    build: .
+    container_name: "celery-beat"
+    restart: on-failure
+    command: [ 'celery', '-A', 'trading_platform', 'beat', '-l', 'INFO' ]
+    depends_on:
+      - db
+      - web
+      - redis
+
+  flower:
+    build: .
+    container_name: "flower"
+    restart: on-failure
+    hostname: flower
+    command: [ 'celery', '-A', 'trading_platform', 'flower' ]
+    depends_on:
+      - db
+      - web
+      - redis
+    ports: 
+      - 5555:5555
