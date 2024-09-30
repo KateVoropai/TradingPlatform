@@ -7,7 +7,7 @@ from users.manager import UserManager
 class User(AbstractUser):
     username = None
     email = models.EmailField('email address', unique=True)
-    date_of_birth = models.DateField('date of birth')
+    date_of_birth = models.DateField('date of birth', null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -16,5 +16,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
-
-    
